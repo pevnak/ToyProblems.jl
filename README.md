@@ -13,4 +13,5 @@ One class problems: `onemoon`, `thingaussian`, and `quadraticgaussian.` All func
 Two class problems: spirals and twomoon
 
 `(x,y) = spirals(n, k = 3)`
+
 `(x,y) = twomoon(n, sigma = 0.6,radius = 2)`
