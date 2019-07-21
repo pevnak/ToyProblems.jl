@@ -10,8 +10,12 @@ function thinnormal(n, ϵ = 1e-1)
 	[1+ϵ 1; 1 1+ϵ] * randn(2, n)
 end
 
-
 function quadraticnormal(n, ϵ = 1e-1)
 	z = 0.15*randn(1, n) .+ 0.2
 	[z.^2; z] + ϵ * randn(2, n)
+end
+
+function sixgaussians(l, ρ = 8)
+	x = reduce(hcat,[randn(2,l) .+ ρ .* [cos(ϕ), sin(ϕ)] for ϕ in 0:45:360])
+	x = x[:,randperm(size(x,2))]
 end
