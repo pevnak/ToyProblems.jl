@@ -1,4 +1,5 @@
 module ToyProblems
+using Random
 export twomoon, spirals
 include("twoclass.jl")
 for p in [:spirals, :twomoon]
