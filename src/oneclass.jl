@@ -19,3 +19,19 @@ function sixgaussians(l, ρ = 8)
 	x = reduce(hcat,[randn(2,l) .+ ρ .* [cos(ϕ), sin(ϕ)] for ϕ in 0:45:360])
 	x = x[:,randperm(size(x,2))]
 end
+
+function flower(n;npetals = 8)
+	theta = 1:npetals
+	n = div(n, length(theta))
+	mapreduce(hcat, theta * (2pi/npetals)) do t
+		ct = cos(t)
+		st = sin(t)
+
+		x0 = randn(n) .+ 5.0
+		y0 = randn(n) .* 0.3
+
+		x = x0 * ct .- y0 * st
+		y = x0 * st .+ y0 * ct
+		[x y]'
+	end
+end
