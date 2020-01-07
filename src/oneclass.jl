@@ -35,3 +35,20 @@ function flower(n;npetals = 8)
 		[x y]'
 	end
 end
+
+
+function flower2(n;npetals = 8)
+	theta = 1:npetals
+	n = div(n, length(theta))
+	mapreduce(hcat, theta * (2pi/npetals)) do t
+		ct = cos(t)
+		st = sin(t)
+
+		x0 = tanh.(randn(n) .- 1) .+ 4.0 .+ 0.05.* randn(n)
+		y0 = randn(n) .* 0.3
+
+		x = x0 * ct .- y0 * st
+		y = x0 * st .+ y0 * ct
+		[x y]'
+	end
+end
