@@ -1,4 +1,4 @@
-function twomoon(n, sigma = 0.6,radius = 2)
+function twomoon(n; sigma = 0.6, radius = 2, offset = [0.0  0.0])
   center1 = -1.0;
   center2 = 1.0;
 
@@ -7,7 +7,7 @@ function twomoon(n, sigma = 0.6,radius = 2)
   semi_up = hcat((radius .+ noise) .*cos.(theta) .+ center1,(radius .+ noise) .* sin.(theta) .- 0.4);
   noise = rand(n)*sigma;
   semi_down = hcat((radius .+ noise) .*cos.(-theta) .+ center2, 0.4 .+ (radius .+ noise) .* sin.(-theta));
-  x = vcat(semi_up,semi_down)'
+  x = Matrix(vcat(semi_up .- offset, semi_down .+ offset)')
   y = ones(Int,2*n)
   y[n+1:end] .= 2
   x, y
@@ -23,5 +23,13 @@ function spirals(n, k = 3)
     x[:,ix] = vcat(transpose(r .* sin.(t)), transpose(r .* cos.(t)))
     y[ix] .= i
   end
-  (x,y)
+  (x,y[:])
+end
+
+function circles(n, ϵ = 0.1)
+  ρ = 2π .* rand(1, 2n);
+  y = hcat(fill(1, 1, n), fill(2, 1, n))
+  x = [ y .* sin.(ρ); y .* cos.(ρ) ]
+  x = x .+ ϵ .* randn(2,2n)
+  x, y[:]
 end

@@ -36,7 +36,6 @@ function flower(n;npetals = 8)
 	end
 end
 
-
 function flower2(n;npetals = 8)
 	theta = 1:npetals
 	n = div(n, length(theta))
@@ -52,3 +51,13 @@ function flower2(n;npetals = 8)
 		[x y]'
 	end
 end
+
+function twonormalonline(T, n; μ = 2)
+	x₁ = rand([0, μ], 1, n)
+	x₂ = randn(1, n)
+	W = [-1.400151989263751 0.5819734942540326; -0.23739000637639154 0.939613866986273]
+	b = [0.5, 0.5]
+	T.(W * vcat(x₁, x₂) .+ b)
+end
+
+twonormalonline(n) = twonormalonline(Float32, n)
