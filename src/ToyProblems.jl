@@ -13,7 +13,7 @@ end
 
 export thinnormal, quadraticnormal, onemoon, sixgaussians, flower
 include("oneclass.jl")
-for p in [:thinnormal, :quadraticnormal, :onemoon, :sixgaussians, :flower]
+for p in [:thinnormal, :quadraticnormal, :onemoon, :sixgaussians, :flower, :flower2]
 	@eval $(p)(::Type{T}, args...) where {T} = T.($(p)(args...))
 end
 
